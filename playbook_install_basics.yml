@@ -1,0 +1,41 @@
+---
+- name: Install Docker and Docker images on Vagrant nodes
+  hosts: nodo1
+  become: yes
+  tasks:
+    - name: Instalar pip
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+
+    - name: Instalar Docker SDK para Python
+      pip:
+        name: docker
+
+    - name: Install dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+
+    - name: Add GPG docker key
+      apt_key: 
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add docker repo
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+        state: present
+
+    - name: Install Docker CE
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
