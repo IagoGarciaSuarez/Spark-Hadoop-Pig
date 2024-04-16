@@ -1,0 +1,19 @@
+---
+- name: Docker Hadoop
+  hosts: nodo1
+  become: yes
+  tasks:
+    - name: Pull Hadoop image
+      docker_image:
+        name: iagogarsu/hadoop-spark-pig-cluster
+        tag: latest
+        source: pull
+    - name: Clone repository
+      git:
+        repo: https://github.com/IagoGarciaSuarez/cluster-yarn-hadoop-spark-pig.git
+        dest: /tools/cluster-yarn-hsp      
+
+    - name: Run container
+      shell: make start
+      args:
+        chdir: /tools/cluster-yarn-hsp

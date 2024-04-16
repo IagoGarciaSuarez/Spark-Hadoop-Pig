@@ -20,8 +20,8 @@ Vagrant.configure("2") do |config|
     nodo1.vm.network "forwarded_port", guest: 80, host: 8001
     nodo1.vm.hostname = "nodo1"
     nodo1.vm.provider "virtualbox" do |vb|
-     vb.memory = "2048"
-     vb.cpus = "2"
+     vb.memory = "4096"
+     vb.cpus = "4"
     end
   end
   
