@@ -8,6 +8,7 @@
         name: iagogarsu/hadoop-spark-pig-cluster
         tag: latest
         source: pull
+        
     - name: Clone repository
       git:
         repo: https://github.com/IagoGarciaSuarez/cluster-yarn-hadoop-spark-pig.git
